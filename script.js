@@ -329,8 +329,8 @@
       ctx.fillRect(0, 0, W, H);
       if (glow > 0) {
         const gg = ctx.createRadialGradient(W / 2, H * 0.45, 0, W / 2, H * 0.45, Math.max(W, H) * 0.5);
-        gg.addColorStop(0, `rgba(212,165,68,${0.16 * glow})`);
-        gg.addColorStop(1, "rgba(212,165,68,0)");
+        gg.addColorStop(0, `rgba(84, 116, 76,${0.16 * glow})`);
+        gg.addColorStop(1, "rgba(84, 116, 76,0)");
         ctx.fillStyle = gg;
         ctx.fillRect(0, 0, W, H);
       }
@@ -358,9 +358,9 @@
       ctx.translate(x, y);
       // glow
       const glow = ctx.createRadialGradient(0, -18 * s, 0, 0, -18 * s, 42 * s * (0.9 + flick * 0.25));
-      glow.addColorStop(0, `rgba(248,228,173,${0.55 + flick * 0.2})`);
-      glow.addColorStop(0.4, `rgba(212,165,68,${0.25 + flick * 0.1})`);
-      glow.addColorStop(1, "rgba(212,165,68,0)");
+      glow.addColorStop(0, `rgba(122, 148, 105,${0.55 + flick * 0.2})`);
+      glow.addColorStop(0.4, `rgba(84, 116, 76,${0.25 + flick * 0.1})`);
+      glow.addColorStop(1, "rgba(84, 116, 76,0)");
       ctx.fillStyle = glow;
       ctx.beginPath();
       ctx.arc(0, -18 * s, 42 * s * (0.9 + flick * 0.25), 0, Math.PI * 2);
@@ -381,7 +381,7 @@
       ctx.quadraticCurveTo(12 * s, 6 * s, 0, 7.5 * s);
       ctx.quadraticCurveTo(-12 * s, 6 * s, -16 * s, 0);
       ctx.fill();
-      ctx.strokeStyle = "rgba(212,165,68,0.8)";
+      ctx.strokeStyle = "rgba(84, 116, 76,0.8)";
       ctx.lineWidth = 1.2;
       ctx.beginPath();
       ctx.ellipse(0, -1 * s, 14 * s, 5 * s, 0, 0, Math.PI);
@@ -426,8 +426,8 @@
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = p.gold
-          ? `rgba(227,185,94,${a})`
-          : `rgba(122,183,255,${a * 0.85})`;
+          ? `rgba(122, 148, 105,${a})`
+          : `rgba(122, 148, 105,${a * 0.85})`;
         ctx.fill();
       });
 
@@ -451,8 +451,8 @@
         const aT = sceneAlpha(t, 700, S1[1], 900, 700);
         if (aT > 0) {
           const size = Math.min(W * 0.055, 44);
-          drawTrackedText("A New Beginning.", W / 2, H * 0.4, size, size * 0.12, "#f0cf7e", aT);
-          drawTrackedText("A New Vision.", W / 2, H * 0.4 + size * 1.7, size, size * 0.12, "#eef2fa", aT * 0.95);
+          drawTrackedText("A New Beginning.", W / 2, H * 0.4, size, size * 0.12, "#9ab089", aT);
+          drawTrackedText("A New Vision.", W / 2, H * 0.4 + size * 1.7, size, size * 0.12, "#fcfcfc", aT * 0.95);
         }
       }
 
@@ -470,14 +470,14 @@
             const p = clamp01(c.prog);
             const x2 = c.x + Math.cos(c.ang) * c.len * p;
             const y2 = c.y + Math.sin(c.ang) * c.len * p;
-            ctx.strokeStyle = c.blue ? "rgba(77,163,255,0.5)" : "rgba(212,165,68,0.5)";
+            ctx.strokeStyle = c.blue ? "rgba(122, 148, 105,0.5)" : "rgba(84, 116, 76,0.5)";
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(c.x, c.y);
             ctx.lineTo(x2, y2);
             ctx.stroke();
             // node
-            ctx.fillStyle = c.blue ? "rgba(130,193,255,0.9)" : "rgba(240,207,126,0.9)";
+            ctx.fillStyle = c.blue ? "rgba(154, 176, 137, 0.9)" : "rgba(122, 148, 105, 0.9)";
             ctx.beginPath();
             ctx.arc(x2, y2, 1.8, 0, Math.PI * 2);
             ctx.fill();
@@ -491,12 +491,12 @@
           const r = easeOutCubic(ringT) * Math.max(W, H) * 0.46;
           const fade = (1 - ringT) * 0.8;
           ctx.save();
-          ctx.strokeStyle = `rgba(77,163,255,${fade})`;
+          ctx.strokeStyle = `rgba(122, 148, 105,${fade})`;
           ctx.lineWidth = 2 - ringT;
           ctx.beginPath();
           ctx.arc(W / 2, H * 0.45, r, 0, Math.PI * 2);
           ctx.stroke();
-          ctx.strokeStyle = `rgba(212,165,68,${fade * 0.7})`;
+          ctx.strokeStyle = `rgba(84, 116, 76,${fade * 0.7})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.arc(W / 2, H * 0.45, r * 0.82, 0, Math.PI * 2);
@@ -507,8 +507,8 @@
         const aT2 = sceneAlpha(t, S2[0] + 800, S3[0] - 300, 800, 600);
         if (aT2 > 0) {
           const size = Math.min(W * 0.04, 32);
-          drawTrackedText("WHERE TRADITION", W / 2, H * 0.42, size, size * 0.16, "#82c1ff", aT2 * 0.9);
-          drawTrackedText("MEETS INNOVATION", W / 2, H * 0.42 + size * 1.8, size, size * 0.16, "#f0cf7e", aT2);
+          drawTrackedText("WHERE TRADITION", W / 2, H * 0.42, size, size * 0.16, "#9ab089", aT2 * 0.9);
+          drawTrackedText("MEETS INNOVATION", W / 2, H * 0.42 + size * 1.8, size, size * 0.16, "#9ab089", aT2);
         }
       }
 
@@ -530,8 +530,8 @@
             const lh = lw * ratio;
             // glow behind logo
             const lg = ctx.createRadialGradient(0, 0, 0, 0, 0, lw * 0.8);
-            lg.addColorStop(0, "rgba(212,165,68,0.28)");
-            lg.addColorStop(0.6, "rgba(77,163,255,0.1)");
+            lg.addColorStop(0, "rgba(84, 116, 76,0.28)");
+            lg.addColorStop(0.6, "rgba(122, 148, 105,0.1)");
             lg.addColorStop(1, "rgba(0,0,0,0)");
             ctx.fillStyle = lg;
             ctx.fillRect(-lw, -lh * 1.4, lw * 2, lh * 2.8);
@@ -549,8 +549,8 @@
           } else {
             // typographic fallback reveal
             const size = Math.min(W * 0.12, 96) * scale;
-            drawTrackedText("NEXT", -size * 0.9, 0, size, size * 0.1, "#eef2fa", aL);
-            drawTrackedText("360", size * 1.05, 0, size, size * 0.1, "#e3b95e", aL);
+            drawTrackedText("NEXT", -size * 0.9, 0, size, size * 0.1, "#fcfcfc", aL);
+            drawTrackedText("360", size * 1.05, 0, size, size * 0.1, "#7a9469", aL);
           }
           ctx.restore();
         }
@@ -558,14 +558,14 @@
         const aT3 = sceneAlpha(t, S3[0] + 2600, S4[0] - 200, 800, 600);
         if (aT3 > 0) {
           const size = Math.min(W * 0.042, 34);
-          drawTrackedText("INTRODUCING THE NEXT360 APP", W / 2, H * 0.62, size, size * 0.14, "#eef2fa", aT3);
+          drawTrackedText("INTRODUCING THE NEXT360 APP", W / 2, H * 0.62, size, size * 0.14, "#fcfcfc", aT3);
         }
       }
 
       /* ---------- SCENE 4 — Dussehra Launch Announcement (19–25s) ---------- */
       if (t >= S4[0] - 200 && t < S5[0]) {
         bgGradient(0.85);
-        const gold = "#f0cf7e";
+        const gold = "#9ab089";
 
         const m1 = sceneAlpha(t, S4[0] + 200, S4[0] + 2600, 700, 500);
         const m2 = sceneAlpha(t, S4[0] + 2400, S4[0] + 4200, 600, 500);
@@ -578,11 +578,11 @@
         }
         if (m2 > 0) {
           const size = Math.min(W * 0.045, 37);
-          drawTrackedText("NEXT360 APP LAUNCHING SOON", W / 2, H * 0.46, size, size * 0.16, "#82c1ff", m2);
+          drawTrackedText("NEXT360 APP LAUNCHING SOON", W / 2, H * 0.46, size, size * 0.16, "#9ab089", m2);
         }
         if (m3 > 0) {
           const size = Math.min(W * 0.04, 33);
-          drawTrackedText("OCTOBER 20, 2026  |  VIJAYADASHAMI", W / 2, H * 0.58, size, size * 0.15, "#eef2fa", m3);
+          drawTrackedText("OCTOBER 20, 2026  |  VIJAYADASHAMI", W / 2, H * 0.58, size, size * 0.15, "#fcfcfc", m3);
         }
       }
 
@@ -600,12 +600,12 @@
             ctx.restore();
           } else {
             const size = Math.min(W * 0.08, 64);
-            drawTrackedText("NEXT360", W / 2, H * 0.32, size, size * 0.12, "#e3b95e", a5);
+            drawTrackedText("NEXT360", W / 2, H * 0.32, size, size * 0.12, "#7a9469", a5);
           }
           const size = Math.min(W * 0.05, 40);
-          drawTrackedText("THE FUTURE STARTS HERE.", W / 2, H * 0.52, size, size * 0.13, "#f0cf7e", a5);
+          drawTrackedText("THE FUTURE STARTS HERE.", W / 2, H * 0.52, size, size * 0.13, "#9ab089", a5);
           const size2 = Math.min(W * 0.034, 27);
-          drawTrackedText("GET READY. NEXT360 IS COMING.", W / 2, H * 0.52 + size * 1.8, size2, size2 * 0.15, "#eef2fa", a5 * 0.9);
+          drawTrackedText("GET READY. NEXT360 IS COMING.", W / 2, H * 0.52 + size * 1.8, size2, size2 * 0.15, "#fcfcfc", a5 * 0.9);
         }
       }
 
@@ -844,7 +844,7 @@
         const alpha = 0.25 + Math.sin(p.a) * 0.2;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = p.gold ? `rgba(227,185,94,${alpha})` : `rgba(122,183,255,${alpha * 0.8})`;
+        ctx.fillStyle = p.gold ? `rgba(122, 148, 105,${alpha})` : `rgba(154, 176, 137,${alpha * 0.8})`;
         ctx.fill();
       });
       raf = requestAnimationFrame(draw);
