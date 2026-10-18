@@ -103,23 +103,23 @@
     const imgs = document.querySelectorAll('img[src*="next360-logo"]');
     const markMissing = () => document.body.classList.add("logo-missing");
 
-    // Preferred chain: bundled SVG wordmark -> optional PNG -> typographic text.
+    // Preferred chain: official PNG -> bundled SVG wordmark -> typographic text.
     function attachFallback(img) {
-      if (img.dataset.logoChain === "png") {
-        // PNG also failed -> typographic fallback
+      if (img.dataset.logoChain === "svg") {
+        // SVG also failed -> typographic fallback
         markMissing();
         return;
       }
-      if (img.dataset.logoChain === "svg") {
-        img.dataset.logoChain = "png";
-        img.src = "assets/next360-logo.png";
+      if (img.dataset.logoChain === "png") {
+        img.dataset.logoChain = "svg";
+        img.src = "assets/next360-logo.svg";
         return;
       }
       markMissing();
     }
 
     imgs.forEach((img) => {
-      img.dataset.logoChain = img.src.endsWith(".png") ? "png" : "svg";
+      img.dataset.logoChain = "png";
       img.addEventListener("error", () => attachFallback(img));
       if (img.complete && img.naturalWidth === 0) attachFallback(img);
     });
@@ -260,18 +260,18 @@
       startCanvasFilm._resize();
     }
 
-    /* --- Preload logo for scene 3 (SVG -> PNG -> typographic fallback) --- */
+    /* --- Preload logo for scene 3 (PNG -> SVG -> typographic fallback) --- */
     const logoImg = new Image();
     let logoReady = false;
     logoImg.onload = () => { logoReady = logoImg.naturalWidth > 0; };
     logoImg.onerror = () => {
-      if (!logoImg.src.endsWith("next360-logo.png")) {
-        logoImg.src = "assets/next360-logo.png";
+      if (!logoImg.src.endsWith("next360-logo.svg")) {
+        logoImg.src = "assets/next360-logo.svg";
       } else {
         logoReady = false;
       }
     };
-    logoImg.src = "assets/next360-logo.svg";
+    logoImg.src = "assets/next360-logo.png";
 
     /* --- Particles --- */
     const isMobile = W < 700;
