@@ -30,6 +30,7 @@
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="#top" aria-label="NEXT360 home">
+          <span class="brand-accent" aria-hidden="true"></span>
           <img class="brand-logo" src="assets/images/next360-logo-dark.png" alt="NEXT360" width="40" height="40" />
           <span class="brand-fallback">NEXT<span class="gold">360</span></span>
         </a>
@@ -38,8 +39,21 @@
           <a href="#experience">Experience</a>
           <a href="#launch">Launch</a>
         </nav>
-        <a class="header-cta" href="#countdown">Countdown</a>
+        <div class="header-right">
+          <a class="header-cta" href="#countdown">Countdown</a>
+          <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
+      <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden>
+        <a href="#vision">Vision</a>
+        <a href="#experience">Experience</a>
+        <a href="#launch">Launch</a>
+        <a href="#countdown" class="mobile-menu-cta">Countdown</a>
+      </nav>
     </header>
 
     <main id="top">

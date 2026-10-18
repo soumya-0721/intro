@@ -922,6 +922,46 @@
     const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 30);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    /* --- Mobile menu --- */
+    const toggle = $("#nav-toggle");
+    const menu = $("#mobile-menu");
+    if (toggle && menu) {
+      const setMenu = (open) => {
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+        menu.hidden = !open;
+      };
+      toggle.addEventListener("click", () => {
+        setMenu(toggle.getAttribute("aria-expanded") !== "true");
+      });
+      menu.querySelectorAll("a").forEach((a) => {
+        a.addEventListener("click", () => setMenu(false));
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+          setMenu(false);
+          toggle.focus();
+        }
+      });
+    }
+
+    /* --- Active-section indicator (desktop nav) --- */
+    const navLinks = Array.from(header.querySelectorAll(".header-nav a"));
+    if (navLinks.length && "IntersectionObserver" in window) {
+      const sections = navLinks
+        .map((a) => document.querySelector(a.getAttribute("href")))
+        .filter(Boolean);
+      const spy = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach((a) => {
+            a.classList.toggle("is-active", a.getAttribute("href") === "#" + entry.target.id);
+          });
+        });
+      }, { rootMargin: "-40% 0px -55% 0px" });
+      sections.forEach((s) => spy.observe(s));
+    }
   }
 
   /* ========================================================================
