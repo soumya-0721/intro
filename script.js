@@ -271,7 +271,7 @@
         logoReady = false;
       }
     };
-    logoImg.src = "assets/next360-logo.png";
+    logoImg.src = "assets/images/next360-logo.png";
 
     /* --- Particles --- */
     const isMobile = W < 700;
