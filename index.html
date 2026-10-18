@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050b18" />
+  <title>NEXT360 — App Launching This Dussehra | October 20, 2026</title>
+  <meta name="description" content="THIS DUSSEHRA, A NEW DIGITAL EXPERIENCE BEGINS. The NEXT360 App by Next360 Organic Products Private Limited launches on Vijayadashami, October 20, 2026. The future starts here." />
+  <meta property="og:title" content="NEXT360 — App Launching This Dussehra" />
+  <meta property="og:description" content="A New Beginning. A New Vision. NEXT360 App launching on Vijayadashami, October 20, 2026." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="intro-playing">
+
+  <!-- ==================== CINEMATIC INTRO OVERLAY ==================== -->
+  <div id="intro-overlay" class="intro-overlay" role="dialog" aria-label="Cinematic launch introduction">
+    <video id="intro-video" class="intro-video" playsinline muted preload="auto" aria-hidden="true"></video>
+    <canvas id="intro-canvas" class="intro-canvas" aria-hidden="true"></canvas>
+    <button id="skip-intro" class="skip-intro" type="button">Skip Intro</button>
+  </div>
+
+  <!-- ==================== SITE ==================== -->
+  <div id="site" class="site">
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="NEXT360 home">
+          <img class="brand-logo" src="assets/next360-logo.svg" alt="NEXT360" width="140" height="36" />
+          <span class="brand-fallback">NEXT<span class="gold">360</span></span>
+        </a>
+        <nav class="header-nav" aria-label="Primary">
+          <a href="#vision">Vision</a>
+          <a href="#experience">Experience</a>
+          <a href="#launch">Launch</a>
+        </nav>
+        <a class="header-cta" href="#countdown">Countdown</a>
+      </div>
+    </header>
+
+    <main id="top">
+
+      <!-- ==================== HERO ==================== -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true">
+          <canvas id="particles-canvas" class="particles-canvas"></canvas>
+          <div class="hero-glow hero-glow--gold"></div>
+          <div class="hero-glow hero-glow--blue"></div>
+          <div class="hero-rings">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="container hero-inner">
+          <p class="hero-kicker reveal">A New Beginning&ensp;·&ensp;A New Vision</p>
+
+          <div class="hero-logo reveal" style="--d:.15s">
+            <img src="assets/next360-logo.svg" alt="NEXT360 logo" width="380" height="96" />
+            <span class="brand-fallback brand-fallback--hero">NEXT<span class="gold">360</span></span>
+          </div>
+
+          <h1 id="hero-title" class="hero-title reveal" style="--d:.3s">
+            Introducing the <span class="gold-text">NEXT360</span> App
+          </h1>
+
+          <p class="hero-sub reveal" style="--d:.45s">
+            This Dussehra, a new digital experience begins.<br />
+            Launching on <strong>Vijayadashami — October 20, 2026</strong>
+          </p>
+          <p class="hero-company reveal" style="--d:.5s">
+            An initiative of <strong>Next360 Organic Products Private Limited</strong>
+          </p>
+
+          <!-- ==================== LIVE COUNTDOWN ==================== -->
+          <div id="countdown" class="countdown reveal" style="--d:.6s" role="timer" aria-live="polite" aria-label="Time remaining until launch">
+            <div class="countdown-unit">
+              <span class="countdown-value" id="cd-days">00</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-sep" aria-hidden="true">:</div>
+            <div class="countdown-unit">
+              <span class="countdown-value" id="cd-hours">00</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-sep" aria-hidden="true">:</div>
+            <div class="countdown-unit">
+              <span class="countdown-value" id="cd-minutes">00</span>
+              <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-sep" aria-hidden="true">:</div>
+            <div class="countdown-unit">
+              <span class="countdown-value" id="cd-seconds">00</span>
+              <span class="countdown-label">Seconds</span>
+            </div>
+          </div>
+
+          <p class="countdown-note reveal" style="--d:.7s" id="countdown-note">
+            Launch time: 10:00 AM IST&ensp;·&ensp;Vijayadashami
+          </p>
+
+          <div class="hero-actions reveal" style="--d:.85s">
+            <button id="replay-intro" class="btn btn-ghost" type="button">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 6.32 5.03.75.75 0 0 1 1.46-.36A8 8 0 1 1 8 0v1.5Zm0 3a.75.75 0 0 1 .75.75v3.19l2.28 1.52a.75.75 0 1 1-.84 1.24L7.6 9.4a.75.75 0 0 1-.35-.63V5.25A.75.75 0 0 1 8 4.5Z" fill="currentColor"/></svg>
+              Replay Cinematic Intro
+            </button>
+            <a class="btn btn-primary" href="#launch">Launch Details</a>
+          </div>
+        </div>
+
+        <div class="hero-scroll" aria-hidden="true">
+          <span></span>
+        </div>
+      </section>
+
+      <!-- ==================== VISION ==================== -->
+      <section id="vision" class="section vision" aria-labelledby="vision-title">
+        <div class="container">
+          <p class="section-kicker">The Occasion</p>
+          <h2 id="vision-title" class="section-title">
+            This Dussehra, a new digital<br />experience begins.
+          </h2>
+          <p class="section-lead">
+            On the day that celebrates wisdom, victory, and new beginnings —
+            NEXT360 arrives. A celebration of progress, crafted with the warmth
+            of tradition and the power of modern technology.
+          </p>
+          <div class="vision-divider" aria-hidden="true">
+            <svg viewBox="0 0 480 40" width="480" height="40" fill="none">
+              <path d="M0 20h190" stroke="url(#gline)" stroke-width="1"/>
+              <circle cx="240" cy="20" r="6" stroke="#d4a544" stroke-width="1.2"/>
+              <circle cx="240" cy="20" r="2.2" fill="#f0cf7e"/>
+              <path d="M290 20h190" stroke="url(#gline2)" stroke-width="1"/>
+              <defs>
+                <linearGradient id="gline" x1="0" y1="20" x2="190" y2="20">
+                  <stop stop-color="#d4a544" stop-opacity="0"/><stop offset="1" stop-color="#d4a544" stop-opacity=".9"/>
+                </linearGradient>
+                <linearGradient id="gline2" x1="290" y1="20" x2="480" y2="20">
+                  <stop stop-color="#d4a544" stop-opacity=".9"/><stop offset="1" stop-color="#d4a544" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== EXPERIENCE ==================== -->
+      <section id="experience" class="section experience" aria-labelledby="exp-title">
+        <div class="container">
+          <p class="section-kicker">The Experience</p>
+          <h2 id="exp-title" class="section-title">Designed to see every angle.</h2>
+
+          <div class="cards">
+            <article class="card reveal-card">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-width="1.6">
+                  <circle cx="24" cy="24" r="15" stroke="#d4a544"/>
+                  <ellipse cx="24" cy="24" rx="7" ry="15" stroke="#4da3ff"/>
+                  <path d="M9 24h30" stroke="#4da3ff"/>
+                  <circle cx="24" cy="24" r="2.4" fill="#f0cf7e" stroke="none"/>
+                </svg>
+              </div>
+              <h3>360° Perspective</h3>
+              <p>One complete view. Every detail, every possibility — brought together in a single, elegant experience.</p>
+            </article>
+
+            <article class="card reveal-card" style="--d:.12s">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-width="1.6">
+                  <path d="M24 7l3.2 9.4H37l-7.9 5.8 3 9.3L24 25.6l-8.1 5.9 3-9.3L11 16.4h9.8L24 7z" stroke="#d4a544" stroke-linejoin="round"/>
+                  <circle cx="24" cy="24" r="19" stroke="#4da3ff" stroke-dasharray="4 5"/>
+                </svg>
+              </div>
+              <h3>Built for the Future</h3>
+              <p>Modern, refined, and blazing fast — technology that moves at the speed of your ambition.</p>
+            </article>
+
+            <article class="card reveal-card" style="--d:.24s">
+              <div class="card-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke-width="1.6">
+                  <path d="M14 30c0-6 4.5-10 10-10s10 4 10 10" stroke="#d4a544"/>
+                  <path d="M24 8v4M10.5 14.5l2.8 2.8M37.5 14.5l-2.8 2.8" stroke="#f0cf7e"/>
+                  <path d="M12 30h24l-2.5 8H14.5L12 30z" stroke="#4da3ff" stroke-linejoin="round"/>
+                  <path d="M20 38v2h8v-2" stroke="#4da3ff"/>
+                </svg>
+              </div>
+              <h3>An Auspicious Beginning</h3>
+              <p>Launched on Vijayadashami — the day of victory and new journeys. A start made to last.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== LAUNCH ANNOUNCEMENT ==================== -->
+      <section id="launch" class="section launch" aria-labelledby="launch-title">
+        <div class="launch-bg" aria-hidden="true">
+          <div class="launch-diya launch-diya--left"></div>
+          <div class="launch-diya launch-diya--right"></div>
+          <div class="launch-glow"></div>
+        </div>
+        <div class="container launch-inner">
+          <p class="section-kicker section-kicker--gold">The Announcement</p>
+          <h2 id="launch-title" class="launch-headline">
+            THIS DUSSEHRA, A NEW<br />DIGITAL EXPERIENCE BEGINS.
+          </h2>
+          <p class="launch-sub">NEXT360 APP LAUNCHING SOON</p>
+          <div class="launch-date-chip">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="2.5" y="4" width="15" height="13.5" rx="2" stroke="#d4a544" stroke-width="1.4"/>
+              <path d="M2.5 8h15M6.5 2.5v3M13.5 2.5v3" stroke="#d4a544" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span>October 20, 2026&ensp;|&ensp;Vijayadashami</span>
+          </div>
+          <div id="launch-cta-slot" class="launch-cta-slot">
+            <a class="btn btn-primary btn-lg" href="#countdown">View Countdown</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FINAL CTA ==================== -->
+      <section class="section finale" aria-labelledby="finale-title">
+        <div class="container finale-inner">
+          <div class="finale-logo">
+            <img src="assets/next360-logo.svg" alt="" width="260" height="66" aria-hidden="true" />
+            <span class="brand-fallback brand-fallback--hero" aria-hidden="true">NEXT<span class="gold">360</span></span>
+          </div>
+          <h2 id="finale-title" class="finale-title">The Future Starts Here.</h2>
+          <p class="finale-sub">Get ready. NEXT360 is coming.</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-brand">NEXT<span class="gold">360</span></p>
+        <p class="footer-copy">Launching Vijayadashami · October 20, 2026</p>
+        <p class="footer-note">Next360 Organic Products Private Limited</p>
+        <p class="footer-note">The app will be available on Google Play at launch.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==================== FINAL 10-SECOND LAUNCH COUNTDOWN ==================== -->
+  <div id="final-countdown" class="final-countdown" hidden aria-hidden="true">
+    <div class="final-countdown-rings" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+    <p class="final-countdown-caption">LAUNCHING IN</p>
+    <span id="final-countdown-number" class="final-countdown-number">10</span>
+    <p class="final-countdown-sub">NEXT360 · VIJAYADASHAMI · OCTOBER 20, 2026</p>
+  </div>
+
+  <!-- ==================== LIVE / LAUNCH OVERLAY ==================== -->
+  <div id="live-overlay" class="live-overlay" hidden>
+    <div class="live-bg" aria-hidden="true">
+      <span class="live-ring"></span><span class="live-ring"></span><span class="live-ring"></span>
+    </div>
+    <div class="live-card">
+      <div class="live-logo">
+        <img src="assets/next360-logo.svg" alt="" width="300" height="76" aria-hidden="true" />
+        <span class="brand-fallback brand-fallback--hero" aria-hidden="true">NEXT<span class="gold">360</span></span>
+      </div>
+      <h2 class="live-title">NEXT360 Is Live!</h2>
+      <p class="live-sub">The wait is over. Welcome to NEXT360!</p>
+
+      <div id="live-store-slot" class="live-store-slot"></div>
+
+      <p id="live-redirect-note" class="live-redirect-note" hidden>
+        Taking you to Google Play…
+      </p>
+      <p id="live-fallback" class="live-fallback" hidden>
+        The official app listing will be available here shortly.
+        Please search for <strong>NEXT360</strong> on the Google Play Store, or check back soon.
+      </p>
+
+      <button id="live-dismiss" class="btn btn-ghost live-dismiss" type="button">Continue to site</button>
+    </div>
+  </div>
+
+  <noscript>
+    <style>
+      body.intro-playing { overflow: auto; }
+      .intro-overlay { display: none !important; }
+      .reveal, .reveal-card { opacity: 1 !important; transform: none !important; }
+    </style>
+    <div class="noscript-banner">
+      JavaScript is required for the live countdown and launch experience.
+      NEXT360 launches on <strong>October 20, 2026 (Vijayadashami)</strong>.
+    </div>
+  </noscript>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
