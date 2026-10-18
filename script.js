@@ -103,7 +103,7 @@
     const imgs = document.querySelectorAll('img[src*="next360-logo"]');
     const markMissing = () => document.body.classList.add("logo-missing");
 
-    // Preferred chain: official PNG -> bundled SVG wordmark -> typographic text.
+    // Preferred chain: transparent dark PNG -> original PNG -> SVG -> text.
     function attachFallback(img) {
       if (img.dataset.logoChain === "svg") {
         // SVG also failed -> typographic fallback
@@ -115,11 +115,12 @@
         img.src = "assets/next360-logo.svg";
         return;
       }
-      markMissing();
+      img.dataset.logoChain = "png";
+      img.src = "assets/images/next360-logo.png";
     }
 
     imgs.forEach((img) => {
-      img.dataset.logoChain = "png";
+      img.dataset.logoChain = "dark";
       img.addEventListener("error", () => attachFallback(img));
       if (img.complete && img.naturalWidth === 0) attachFallback(img);
     });
@@ -260,18 +261,25 @@
       startCanvasFilm._resize();
     }
 
-    /* --- Preload logo for scene 3 (PNG -> SVG -> typographic fallback) --- */
+    /* --- Preload logo (transparent dark variant -> original PNG -> SVG -> text) --- */
     const logoImg = new Image();
     let logoReady = false;
+    const logoChain = [
+      "assets/images/next360-logo-dark.png",
+      "assets/images/next360-logo.png",
+      "assets/next360-logo.svg",
+    ];
+    let logoChainIdx = 0;
     logoImg.onload = () => { logoReady = logoImg.naturalWidth > 0; };
     logoImg.onerror = () => {
-      if (!logoImg.src.endsWith("next360-logo.svg")) {
-        logoImg.src = "assets/next360-logo.svg";
+      logoChainIdx += 1;
+      if (logoChainIdx < logoChain.length) {
+        logoImg.src = logoChain[logoChainIdx];
       } else {
         logoReady = false;
       }
     };
-    logoImg.src = "assets/images/next360-logo.png";
+    logoImg.src = logoChain[0];
 
     /* --- Particles --- */
     const isMobile = W < 700;
@@ -519,7 +527,7 @@
 
         const aL = sceneAlpha(t, S3[0], S4[0] - 500, 900, 900);
         if (aL > 0) {
-          const scale = 0.86 + easeOutCubic(clamp01((t - S3[0]) / 1400)) * 0.14;
+          const scale = 0.96 + easeOutCubic(clamp01((t - S3[0]) / 1400)) * 0.04;
           ctx.save();
           ctx.globalAlpha = aL;
           ctx.translate(W / 2, H * 0.42);
@@ -529,49 +537,33 @@
             const ratio = logoImg.naturalHeight / logoImg.naturalWidth;
             const lw = maxW * scale;
             const lh = lw * ratio;
-            // soft brand glow behind the card
-            const lg = ctx.createRadialGradient(0, 0, 0, 0, 0, lw * 0.9);
-            lg.addColorStop(0, "rgba(84, 116, 76,0.30)");
-            lg.addColorStop(0.6, "rgba(122, 148, 105,0.10)");
+            // emerald light gradually revealing the logo
+            const lg = ctx.createRadialGradient(0, 0, 0, 0, 0, lw * 0.95);
+            lg.addColorStop(0, "rgba(84, 116, 76,0.34)");
+            lg.addColorStop(0.55, "rgba(122, 148, 105,0.12)");
             lg.addColorStop(1, "rgba(0,0,0,0)");
             ctx.fillStyle = lg;
-            ctx.fillRect(-lw * 1.2, -lh * 1.5, lw * 2.4, lh * 3);
-            // white rounded badge (logo artwork has a white background)
-            const pad = lw * 0.07, rad = lw * 0.06;
-            const bx = -lw / 2 - pad, by = -lh / 2 - pad, bw = lw + pad * 2, bh = lh + pad * 2;
-            ctx.save();
-            ctx.shadowColor = "rgba(0,0,0,0.45)";
-            ctx.shadowBlur = 40;
-            ctx.shadowOffsetY = 14;
-            ctx.beginPath();
-            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
-            else ctx.rect(bx, by, bw, bh);
-            ctx.fillStyle = "#fcfcfc";
-            ctx.fill();
-            ctx.restore();
-            ctx.strokeStyle = "rgba(122,148,105,0.5)";
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
-            else ctx.rect(bx, by, bw, bh);
-            ctx.stroke();
+            ctx.fillRect(-lw * 1.25, -lh * 1.6, lw * 2.5, lh * 3.2);
+            // transparent logo directly on the dark canvas
             ctx.drawImage(logoImg, -lw / 2, -lh / 2, lw, lh);
-            // metallic shine sweep across the badge
-            const shineX = ((t - S3[0]) / 2600) % 1.6 * lw * 1.6 - lw * 0.9;
-            ctx.save();
-            ctx.beginPath();
-            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
-            else ctx.rect(bx, by, bw, bh);
-            ctx.clip();
-            const sh = ctx.createLinearGradient(shineX - 50, 0, shineX + 50, 0);
-            sh.addColorStop(0, "rgba(255,255,255,0)");
-            sh.addColorStop(0.5, "rgba(240,255,240,0.5)");
-            sh.addColorStop(1, "rgba(255,255,255,0)");
-            ctx.fillStyle = sh;
-            ctx.fillRect(bx, by, bw, bh);
-            ctx.restore();
-            // remember card bottom (screen space) so the caption never overlaps it
-            scene3CardBottom = H * 0.42 + lh / 2 + pad;
+            // one restrained highlight pass across the mark
+            const sweepP = clamp01((t - S3[0] - 900) / 1700);
+            if (sweepP > 0 && sweepP < 1) {
+              ctx.save();
+              ctx.beginPath();
+              ctx.rect(-lw / 2, -lh / 2, lw, lh);
+              ctx.clip();
+              const shineX = -lw * 0.75 + sweepP * lw * 1.5;
+              const sh = ctx.createLinearGradient(shineX - lw * 0.12, 0, shineX + lw * 0.12, 0);
+              sh.addColorStop(0, "rgba(255,255,255,0)");
+              sh.addColorStop(0.5, "rgba(240,255,240,0.38)");
+              sh.addColorStop(1, "rgba(255,255,255,0)");
+              ctx.fillStyle = sh;
+              ctx.fillRect(-lw / 2, -lh / 2, lw, lh);
+              ctx.restore();
+            }
+            // remember logo bottom (screen space) so the caption never overlaps it
+            scene3CardBottom = H * 0.42 + lh / 2;
           } else {
             scene3CardBottom = H * 0.42 + Math.min(W * 0.12, 96) * 0.7;
             // typographic fallback reveal
@@ -585,7 +577,7 @@
         const aT3 = sceneAlpha(t, S3[0] + 2600, S4[0] - 200, 800, 600);
         if (aT3 > 0) {
           const size = Math.min(W * 0.042, 34);
-          // always below the white badge — white text must never sit on it
+          // always below the logo — text must never sit on the mark
           const capY = Math.max((scene3CardBottom || H * 0.55) + size * 1.8, H * 0.58);
           if (capY < H * 0.93) {
             drawTrackedText("INTRODUCING THE NEXT360 APP", W / 2, capY, size, size * 0.14, "#fcfcfc", aT3);
@@ -628,32 +620,24 @@
             const ratio = logoImg.naturalHeight / logoImg.naturalWidth;
             const lw = maxW, lh = maxW * ratio;
             const cx = W / 2, cy = H * 0.32;
-            const pad = lw * 0.07, rad = lw * 0.06;
-            const bx = cx - lw / 2 - pad, by = cy - lh / 2 - pad, bw = lw + pad * 2, bh = lh + pad * 2;
             ctx.save();
             ctx.globalAlpha = a5;
-            ctx.shadowColor = "rgba(0,0,0,0.45)";
-            ctx.shadowBlur = 34;
-            ctx.shadowOffsetY = 12;
-            ctx.beginPath();
-            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
-            else ctx.rect(bx, by, bw, bh);
-            ctx.fillStyle = "#fcfcfc";
-            ctx.fill();
-            ctx.shadowColor = "transparent";
-            ctx.strokeStyle = "rgba(122,148,105,0.5)";
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+            const lg5 = ctx.createRadialGradient(cx, cy, 0, cx, cy, lw * 0.9);
+            lg5.addColorStop(0, "rgba(84, 116, 76,0.3)");
+            lg5.addColorStop(0.55, "rgba(122, 148, 105,0.1)");
+            lg5.addColorStop(1, "rgba(0,0,0,0)");
+            ctx.fillStyle = lg5;
+            ctx.fillRect(cx - lw * 1.25, cy - lh * 1.55, lw * 2.5, lh * 3.1);
             ctx.drawImage(logoImg, cx - lw / 2, cy - lh / 2, lw, lh);
             ctx.restore();
-            s5CardBottom = cy + lh / 2 + pad;
+            s5CardBottom = cy + lh / 2;
           } else {
             const size = Math.min(W * 0.08, 64);
             drawTrackedText("NEXT360", W / 2, H * 0.32, size, size * 0.12, "#7a9469", a5);
             s5CardBottom = H * 0.32 + size * 0.7;
           }
           const size = Math.min(W * 0.05, 40);
-          // place lines below the badge, never on the white surface
+          // place lines below the mark
           const line1Y = Math.max(s5CardBottom + size * 1.6, H * 0.52);
           drawTrackedText("THE FUTURE STARTS HERE.", W / 2, line1Y, size, size * 0.13, "#9ab089", a5);
           const size2 = Math.min(W * 0.034, 27);
