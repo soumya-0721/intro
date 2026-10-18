@@ -318,6 +318,7 @@
     const TOTAL = S5[1];
 
     const t0 = performance.now();
+    let scene3CardBottom = 0; // bottom of the logo badge, for caption placement
 
     /* --- Drawing helpers --- */
     function bgGradient(glow) {
@@ -524,7 +525,7 @@
           ctx.translate(W / 2, H * 0.42);
 
           if (logoReady) {
-            const maxW = Math.min(W * 0.5, 380);
+            const maxW = Math.min(W * 0.42, 330);
             const ratio = logoImg.naturalHeight / logoImg.naturalWidth;
             const lw = maxW * scale;
             const lh = lw * ratio;
@@ -569,7 +570,10 @@
             ctx.fillStyle = sh;
             ctx.fillRect(bx, by, bw, bh);
             ctx.restore();
+            // remember card bottom (screen space) so the caption never overlaps it
+            scene3CardBottom = H * 0.42 + lh / 2 + pad;
           } else {
+            scene3CardBottom = H * 0.42 + Math.min(W * 0.12, 96) * 0.7;
             // typographic fallback reveal
             const size = Math.min(W * 0.12, 96) * scale;
             drawTrackedText("NEXT", -size * 0.9, 0, size, size * 0.1, "#fcfcfc", aL);
@@ -581,7 +585,11 @@
         const aT3 = sceneAlpha(t, S3[0] + 2600, S4[0] - 200, 800, 600);
         if (aT3 > 0) {
           const size = Math.min(W * 0.042, 34);
-          drawTrackedText("INTRODUCING THE NEXT360 APP", W / 2, H * 0.62, size, size * 0.14, "#fcfcfc", aT3);
+          // always below the white badge — white text must never sit on it
+          const capY = Math.max((scene3CardBottom || H * 0.55) + size * 1.8, H * 0.58);
+          if (capY < H * 0.93) {
+            drawTrackedText("INTRODUCING THE NEXT360 APP", W / 2, capY, size, size * 0.14, "#fcfcfc", aT3);
+          }
         }
       }
 
@@ -614,6 +622,7 @@
         bgGradient(0.6);
         const a5 = sceneAlpha(t, S5[0], S5[1], 700, 900);
         if (a5 > 0) {
+          let s5CardBottom = H * 0.32;
           if (logoReady) {
             const maxW = Math.min(W * 0.34, 260);
             const ratio = logoImg.naturalHeight / logoImg.naturalWidth;
@@ -637,14 +646,18 @@
             ctx.stroke();
             ctx.drawImage(logoImg, cx - lw / 2, cy - lh / 2, lw, lh);
             ctx.restore();
+            s5CardBottom = cy + lh / 2 + pad;
           } else {
             const size = Math.min(W * 0.08, 64);
             drawTrackedText("NEXT360", W / 2, H * 0.32, size, size * 0.12, "#7a9469", a5);
+            s5CardBottom = H * 0.32 + size * 0.7;
           }
           const size = Math.min(W * 0.05, 40);
-          drawTrackedText("THE FUTURE STARTS HERE.", W / 2, H * 0.52, size, size * 0.13, "#9ab089", a5);
+          // place lines below the badge, never on the white surface
+          const line1Y = Math.max(s5CardBottom + size * 1.6, H * 0.52);
+          drawTrackedText("THE FUTURE STARTS HERE.", W / 2, line1Y, size, size * 0.13, "#9ab089", a5);
           const size2 = Math.min(W * 0.034, 27);
-          drawTrackedText("GET READY. NEXT360 IS COMING.", W / 2, H * 0.52 + size * 1.8, size2, size2 * 0.15, "#fcfcfc", a5 * 0.9);
+          drawTrackedText("GET READY. NEXT360 IS COMING.", W / 2, line1Y + size * 1.8, size2, size2 * 0.15, "#fcfcfc", a5 * 0.9);
         }
       }
 
