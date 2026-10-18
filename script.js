@@ -524,28 +524,51 @@
           ctx.translate(W / 2, H * 0.42);
 
           if (logoReady) {
-            const maxW = Math.min(W * 0.56, 420);
+            const maxW = Math.min(W * 0.5, 380);
             const ratio = logoImg.naturalHeight / logoImg.naturalWidth;
             const lw = maxW * scale;
             const lh = lw * ratio;
-            // glow behind logo
-            const lg = ctx.createRadialGradient(0, 0, 0, 0, 0, lw * 0.8);
-            lg.addColorStop(0, "rgba(84, 116, 76,0.28)");
-            lg.addColorStop(0.6, "rgba(122, 148, 105,0.1)");
+            // soft brand glow behind the card
+            const lg = ctx.createRadialGradient(0, 0, 0, 0, 0, lw * 0.9);
+            lg.addColorStop(0, "rgba(84, 116, 76,0.30)");
+            lg.addColorStop(0.6, "rgba(122, 148, 105,0.10)");
             lg.addColorStop(1, "rgba(0,0,0,0)");
             ctx.fillStyle = lg;
-            ctx.fillRect(-lw, -lh * 1.4, lw * 2, lh * 2.8);
+            ctx.fillRect(-lw * 1.2, -lh * 1.5, lw * 2.4, lh * 3);
+            // white rounded badge (logo artwork has a white background)
+            const pad = lw * 0.07, rad = lw * 0.06;
+            const bx = -lw / 2 - pad, by = -lh / 2 - pad, bw = lw + pad * 2, bh = lh + pad * 2;
+            ctx.save();
+            ctx.shadowColor = "rgba(0,0,0,0.45)";
+            ctx.shadowBlur = 40;
+            ctx.shadowOffsetY = 14;
+            ctx.beginPath();
+            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
+            else ctx.rect(bx, by, bw, bh);
+            ctx.fillStyle = "#fcfcfc";
+            ctx.fill();
+            ctx.restore();
+            ctx.strokeStyle = "rgba(122,148,105,0.5)";
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
+            else ctx.rect(bx, by, bw, bh);
+            ctx.stroke();
             ctx.drawImage(logoImg, -lw / 2, -lh / 2, lw, lh);
-            // metallic shine sweep
+            // metallic shine sweep across the badge
             const shineX = ((t - S3[0]) / 2600) % 1.6 * lw * 1.6 - lw * 0.9;
-            ctx.globalCompositeOperation = "source-atop";
-            const sh = ctx.createLinearGradient(shineX - 40, 0, shineX + 40, 0);
+            ctx.save();
+            ctx.beginPath();
+            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
+            else ctx.rect(bx, by, bw, bh);
+            ctx.clip();
+            const sh = ctx.createLinearGradient(shineX - 50, 0, shineX + 50, 0);
             sh.addColorStop(0, "rgba(255,255,255,0)");
-            sh.addColorStop(0.5, "rgba(255,244,214,0.35)");
+            sh.addColorStop(0.5, "rgba(240,255,240,0.5)");
             sh.addColorStop(1, "rgba(255,255,255,0)");
             ctx.fillStyle = sh;
-            ctx.fillRect(-lw / 2, -lh / 2, lw, lh);
-            ctx.globalCompositeOperation = "source-over";
+            ctx.fillRect(bx, by, bw, bh);
+            ctx.restore();
           } else {
             // typographic fallback reveal
             const size = Math.min(W * 0.12, 96) * scale;
@@ -592,11 +615,27 @@
         const a5 = sceneAlpha(t, S5[0], S5[1], 700, 900);
         if (a5 > 0) {
           if (logoReady) {
-            const maxW = Math.min(W * 0.4, 300);
+            const maxW = Math.min(W * 0.34, 260);
             const ratio = logoImg.naturalHeight / logoImg.naturalWidth;
+            const lw = maxW, lh = maxW * ratio;
+            const cx = W / 2, cy = H * 0.32;
+            const pad = lw * 0.07, rad = lw * 0.06;
+            const bx = cx - lw / 2 - pad, by = cy - lh / 2 - pad, bw = lw + pad * 2, bh = lh + pad * 2;
             ctx.save();
             ctx.globalAlpha = a5;
-            ctx.drawImage(logoImg, W / 2 - maxW / 2, H * 0.32 - (maxW * ratio) / 2, maxW, maxW * ratio);
+            ctx.shadowColor = "rgba(0,0,0,0.45)";
+            ctx.shadowBlur = 34;
+            ctx.shadowOffsetY = 12;
+            ctx.beginPath();
+            if (typeof ctx.roundRect === "function") ctx.roundRect(bx, by, bw, bh, rad);
+            else ctx.rect(bx, by, bw, bh);
+            ctx.fillStyle = "#fcfcfc";
+            ctx.fill();
+            ctx.shadowColor = "transparent";
+            ctx.strokeStyle = "rgba(122,148,105,0.5)";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.drawImage(logoImg, cx - lw / 2, cy - lh / 2, lw, lh);
             ctx.restore();
           } else {
             const size = Math.min(W * 0.08, 64);

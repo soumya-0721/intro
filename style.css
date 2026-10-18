@@ -85,7 +85,20 @@ strong { font-weight: 600; color: var(--text); }
    ========================================================================== */
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; }
 
-.brand-logo { height: 34px; width: auto; }
+/* Logo is a white-background artwork (640x595) — present it as an
+   intentional premium white badge that lifts cleanly off the dark theme. */
+.brand-logo {
+  box-sizing: content-box;
+  height: 36px;
+  width: auto;
+  background: #fff;
+  border-radius: 9px;
+  padding: 4px 7px;
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(122, 148, 105, 0.3),
+    0 0 18px rgba(84, 116, 76, 0.18);
+}
 
 .brand-fallback {
   font-family: var(--font-display);
@@ -359,10 +372,17 @@ body.logo-missing .brand-fallback { display: inline-block; }
 
 .hero-logo { margin-bottom: 0.4rem; }
 .hero-logo img {
-  height: clamp(64px, 12vw, 96px);
+  box-sizing: content-box;
+  height: clamp(110px, 16vw, 150px);
   width: auto;
   margin-inline: auto;
-  filter: drop-shadow(0 6px 30px rgba(84, 116, 76, 0.35));
+  background: #fff;
+  border-radius: clamp(16px, 3vw, 24px);
+  padding: clamp(10px, 2vw, 16px);
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(122, 148, 105, 0.35),
+    0 0 60px rgba(84, 116, 76, 0.3);
 }
 
 .hero-title {
@@ -666,10 +686,17 @@ body.logo-missing .brand-fallback { display: inline-block; }
 }
 .finale-inner { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .finale-logo img {
-  height: clamp(52px, 9vw, 66px);
+  box-sizing: content-box;
+  height: clamp(90px, 13vw, 120px);
   width: auto;
   margin-inline: auto;
-  filter: drop-shadow(0 4px 26px rgba(84, 116, 76, 0.3));
+  background: #fff;
+  border-radius: clamp(14px, 2.5vw, 20px);
+  padding: clamp(9px, 1.6vw, 13px);
+  box-shadow:
+    0 14px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(122, 148, 105, 0.35),
+    0 0 48px rgba(84, 116, 76, 0.25);
 }
 .finale-title {
   font-family: var(--font-display);
@@ -831,9 +858,17 @@ body.final-countdown-active { overflow: hidden; }
 .live-overlay.is-visible .live-card { transform: translateY(0) scale(1); }
 
 .live-logo img {
-  height: clamp(56px, 10vw, 76px);
+  box-sizing: content-box;
+  height: clamp(100px, 14vw, 130px);
   width: auto;
   margin-inline: auto;
+  background: #fff;
+  border-radius: clamp(14px, 2.5vw, 20px);
+  padding: clamp(10px, 1.8vw, 14px);
+  box-shadow:
+    0 16px 44px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(122, 148, 105, 0.4),
+    0 0 52px rgba(84, 116, 76, 0.3);
 }
 
 .live-title {
