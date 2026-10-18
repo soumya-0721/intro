@@ -390,12 +390,6 @@ body.logo-missing .brand-fallback { display: inline-block; }
     0 0 60px rgba(84, 116, 76, 0.3);
 }
 
-.hero-title,
-.hero-sub {
-  /* kept only for legacy markup — hero shows logo + countdown */
-  display: none;
-}
-
 /* ---------- Countdown ---------- */
 .countdown {
   display: flex;
@@ -459,39 +453,6 @@ body.logo-missing .brand-fallback { display: inline-block; }
 .countdown.is-complete {
   border-color: rgba(0, 200, 83, 0.4);
   box-shadow: 0 20px 60px rgba(0, 200, 83, 0.12);
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 0.25rem;
-}
-
-.hero-scroll {
-  position: absolute;
-  bottom: 1.6rem;
-  left: 50%;
-  translate: -50%;
-  width: 26px;
-  height: 42px;
-  border: 1.5px solid rgba(122, 148, 105, 0.4);
-  border-radius: 14px;
-  display: grid;
-  justify-items: center;
-  padding-top: 7px;
-}
-.hero-scroll span {
-  width: 3px; height: 8px;
-  border-radius: 2px;
-  background: var(--green-400);
-  animation: scrollHint 1.8s ease-in-out infinite;
-}
-@keyframes scrollHint {
-  0% { transform: translateY(0); opacity: 1; }
-  70% { transform: translateY(12px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 0; }
 }
 
 /* ==========================================================================
@@ -947,8 +908,6 @@ body.no-intro .reveal,
   .countdown { gap: 0.15rem; padding-inline: 0.7rem; }
   .countdown-unit { min-width: 52px; }
   .countdown-sep { display: none; }
-  .hero-actions { flex-direction: column; width: 100%; max-width: 320px; }
-  .hero-actions .btn { width: 100%; }
   .launch-diya { width: 80px; height: 80px; }
 }
 
@@ -963,5 +922,5 @@ body.no-intro .reveal,
     transition-duration: 0.01ms !important;
   }
   .reveal, .reveal-card { opacity: 1; transform: none; }
-  .hero-rings, .hero-scroll { display: none; }
+  .hero-rings { display: none; }
 }
